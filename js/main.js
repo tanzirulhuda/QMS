@@ -1,3 +1,12 @@
+$(document).ready(function() {
+  //Preloader
+  preloaderFadeOutTime = 500;
+  function hidePreloader() {
+  var preloader = $('.spinner-wrapper');
+  preloader.fadeOut(preloaderFadeOutTime);
+  }
+  hidePreloader();
+});
 $("#products-nav").click(function(){
     $("#products-sub-menu").fadeToggle();
     $("#sm-products-sub-menu").fadeToggle();

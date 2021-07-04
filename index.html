@@ -14,6 +14,16 @@
 
 </head>
 <body>
+  <!--CSS Spinner-->
+  <div class="spinner-wrapper">
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>
+  </div>
     <section class="topbar header">
         <div class="logo_area">
             <!-- d-none d-sm-none d-md-block -->
@@ -313,6 +323,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="./js/main.js"></script>
+    <script>
+      $(document).ready(function() {
+      //Preloader
+      preloaderFadeOutTime = 500;
+      function hidePreloader() {
+      var preloader = $('.spinner-wrapper');
+      preloader.fadeOut(preloaderFadeOutTime);
+      }
+      hidePreloader();
+      });
+    </script>
     
 </body>
 </html>
