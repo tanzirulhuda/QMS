@@ -1,0 +1,1287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Material Design Bootstrap</title>
+  <!-- Roboto Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&display=swap">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://mdbootstrap.com/previews/ecommerce-demo/css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="https://mdbootstrap.com/previews/ecommerce-demo/css/mdb-pro.min.css">
+  <!-- Material Design Bootstrap Ecommerce -->
+  <link rel="stylesheet" href="https://mdbootstrap.com/previews/ecommerce-demo/css/mdb.ecommerce.min.css">
+  <!-- Your custom styles (optional) -->
+  <style>
+    @supports (--css: variables) {
+    input[type="range"].mdbMultiRange {
+      padding: 0;
+      margin: 0;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    input[type="range"].mdbMultiRange.original {
+      position: absolute;
+    }
+
+    input[type="range"].mdbMultiRange.original::-webkit-slider-thumb {
+      position: relative;
+      z-index: 2;
+    }
+
+    input[type="range"].mdbMultiRange.original::-moz-range-thumb {
+      transform: scale(1);
+      z-index: 1;
+    }
+
+    input[type="range"].mdbMultiRange::-moz-range-track {
+      border-color: transparent;
+    }
+
+    input[type="range"].mdbMultiRange.ghost {
+      position: relative;
+    }
+
+    input[type="range"].mdbMultiRange.ghost:nth-of-type(n+1) {
+      position: absolute;
+    }
+
+  }
+
+
+  .multi-range-field {
+    position: relative;
+  }
+
+  .multi-range-field input[type=range] {
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    margin: 15px 0px;
+    padding: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid #fff;
+    /* fix for FF unable to apply focus style bug  */
+  }
+
+  .multi-range-field input[type=range]:focus {
+    outline: none;
+  }
+
+  .multi-range-field input[type=range]+.thumb {
+    position: absolute;
+    border: none;
+    height: 0;
+    width: 0;
+    border-radius: 50%;
+    background-color: #4285f4;
+    top: 10px;
+    margin-left: -6px;
+    transform-origin: 50% 50%;
+    transform: rotate(-45deg);
+  }
+
+  .multi-range-field input[type=range]+.thumb .value {
+    display: block;
+    width: 30px;
+    text-align: center;
+    color: #4285f4;
+    font-size: 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .multi-range-field input[type=range]+.thumb.active {
+    -webkit-border-radius: 50% 50% 50% 0;
+    border-radius: 50% 50% 50% 0;
+  }
+
+  .multi-range-field input[type=range]+.thumb.active .value {
+    color: #fff;
+    margin-left: -1px;
+    margin-top: 8px;
+    font-size: 10px;
+  }
+
+  .multi-range-field input[type=range]::-webkit-slider-runnable-track {
+    height: 3px;
+    background: #c2c0c2;
+    border: none;
+  }
+
+  .multi-range-field input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    height: 14px;
+    width: 14px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #4285f4;
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    margin: -5px 0 0 0;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+  }
+
+  .multi-range-field input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+  }
+
+  .multi-range-field input[type=range]::-moz-range-track {
+    /*required for proper track sizing in FF*/
+    height: 3px;
+    background: #c2c0c2;
+    border: none;
+  }
+
+  .multi-range-field input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #4285f4;
+    margin-top: -5px;
+  }
+
+  .multi-range-field input[type=range]:-moz-focusring {
+    /*hide the outline behind the border*/
+    outline: 1px solid #fff;
+    outline-offset: -1px;
+  }
+
+  .multi-range-field input[type=range]:focus::-moz-range-track {
+    background: #c2c0c2;
+  }
+
+  .multi-range-field input[type=range]::-ms-track {
+    height: 3px;
+    background: transparent;
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    border-color: transparent;
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-width: 6px 0;
+    color: transparent;
+    /*remove default tick marks*/
+  }
+
+  .multi-range-field input[type=range]::-ms-fill-lower {
+    background: #c2c0c2;
+  }
+
+  .multi-range-field input[type=range]::-ms-fill-upper {
+    background: #c2c0c2;
+  }
+
+  .multi-range-field input[type=range]::-ms-thumb {
+    border: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #4285f4;
+  }
+
+  .multi-range-field input[type=range]:focus::-ms-fill-lower {
+    background: #c2c0c2;
+  }
+
+  .multi-range-field input[type=range]:focus::-ms-fill-upper {
+    background: #c2c0c2;
+  }
+
+  .thumb-horizontal-wrapper {
+    position: relative;
+    top: 190px;
+    transform: rotate(-270deg);
+    top: 500px;
+  }
+
+  .multi-range-field input[type=range]+.thumb-horizontal .value {
+    transform: rotate(315deg) !important;
+  }
+  </style>
+</head>
+
+<body class="skin-light">
+
+  <!-- Main Navigation -->
+  <header>
+
+    <!-- Modal Contact -->
+    <div class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header py-4">
+            <h5 class="modal-title mx-auto">Write to us</h5>
+            <button type="button" class="close p-0 m-0" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3">
+            <div class="md-form md-outline">
+              <i class="fas fa-user prefix"></i>
+              <input type="text" id="contactForm-name1" class="form-control">
+              <label for="contactForm-name1">Your name</label>
+            </div>
+            <div class="md-form md-outline">
+              <i class="fas fa-envelope prefix"></i>
+              <input type="email" id="contactForm-email1" class="form-control">
+              <label for="contactForm-email1">Your email</label>
+            </div>
+            <div class="md-form md-outline">
+              <i class="fas fa-tag prefix"></i>
+              <input type="text" id="contact321" class="form-control">
+              <label for="contact321">Subject</label>
+            </div>
+            <div class="md-form md-outline">
+              <i class="fas fa-pencil-alt prefix"></i>
+              <textarea type="text" id="contact81" class="md-textarea form-control" rows="4"></textarea>
+              <label for="contact81">Your message</label>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center py-4">
+            <button class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Contact -->
+
+    <!-- Modal Login / Register -->
+    <div class="modal fade show" id="modalLoginRegister" tabindex="-1" role="dialog" aria-modal="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <!-- Pills -->
+            <ul class="nav md-pills nav-justified pills-primary">
+              <li class="nav-item">
+                <a class="nav-link border border-primary border-rounded active show" data-toggle="tab"
+                  href="#modalLoginRegister-login" role="tab" aria-selected="true">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link border border-primary border-rounded" data-toggle="tab"
+                  href="#modalLoginRegister-register" role="tab" aria-selected="false">Register</a>
+              </li>
+            </ul>
+            <!-- Pills -->
+
+            <!-- Content -->
+            <div class="tab-content py-0">
+
+              <!-- First panel -->
+              <div class="tab-pane fade in show active" id="modalLoginRegister-login" role="tabpanel">
+
+                <!-- Login form -->
+                <form id="formLoginRegister-login" class="pt-2" action="login" method="post">
+
+                  <div class="md-form md-outline">
+                    <i class="fas fa-envelope prefix"></i>
+                    <input type="email" id="formLoginRegister-email" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-email">Your email</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-lock prefix"></i>
+                    <input type="password" id="formLoginRegiser-password" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegiser-password">Your password</label>
+                  </div>
+
+                  <div class="text-center mt-4 pt-3">
+                    <button type="button" class="btn btn-outline-primary mr-1 mb-2 waves-effect waves-light">Forgot password?</button>
+                    <button type="button" class="btn btn-primary mb-2">Login</button>
+                  </div>
+
+                </form>
+                <!-- Login form -->
+
+              </div>
+              <!-- First panel -->
+
+              <!-- Second panel -->
+              <div class="tab-pane fade" id="modalLoginRegister-register" role="tabpanel">
+
+                <!-- Register form -->
+                <form id="formLoginRegister-register" class="pt-2" action="register" method="post">
+
+                  <div class="md-form md-outline">
+                    <i class="fas fa-user prefix"></i>
+                    <input type="text" id="formLoginRegister-name" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-name">Your name</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-pencil-alt prefix"></i>
+                    <input type="text" id="formLoginRegister-username" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-username">Your username</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-envelope prefix"></i>
+                    <input type="email" id="formLoginRegister-email-example" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-email-example">Your email</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-lock prefix"></i>
+                    <input type="password" id="formLoginRegister-password-example" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-password-example">Your password</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-key prefix"></i>
+                    <input type="password" id="formLoginRegister-password-repeat" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-password-repeat">Repeat password</label>
+                  </div>
+
+                  <div class="form-check mt-4 mb-3 pl-0 text-left">
+                    <input type="checkbox" class="form-check-input filled-in" id="formLoginRegister-newsletter" name="newsletter">
+                    <label class="form-check-label small grey-text" for="formLoginRegister-newsletter">
+                      I agree to sign up for account notifications and newsletter
+                    </label>
+                  </div>
+
+                  <div class="text-center">
+                    <p class="small grey-text mb-4">Lorem ipsum dolor sit amet <a target="_blank" href="#!">Privacy Policy</a>.</p>
+                    <button type="button" class="btn btn-primary my-2">Sign up</button>
+                  </div>
+
+                </form>
+                <!-- Register form -->
+
+              </div>
+              <!-- Second panel -->
+
+            </div>
+            <!-- Content -->
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Login / Register -->
+
+    <!-- Modal Login / Register -->
+    <div class="modal fade show" id="modalLoginRegister2" tabindex="-1" role="dialog" aria-modal="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+
+            <!-- Pills -->
+            <ul class="nav md-pills nav-justified pills-primary">
+              <li class="nav-item">
+                <a class="nav-link border border-primary border-rounded" data-toggle="tab"
+                  href="#modalLoginRegister-login2" role="tab" aria-selected="true">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link border border-primary border-rounded active show" data-toggle="tab"
+                  href="#modalLoginRegister-register2" role="tab" aria-selected="false">Register</a>
+              </li>
+            </ul>
+            <!-- Pills -->
+
+            <!-- Content -->
+            <div class="tab-content py-0">
+
+              <!-- First panel -->
+              <div class="tab-pane fade" id="modalLoginRegister-login2" role="tabpanel">
+
+                <!-- Login form -->
+                <form id="formLoginRegister-login2" class="pt-2" action="login" method="post">
+
+                  <div class="md-form md-outline">
+                    <i class="fas fa-envelope prefix"></i>
+                    <input type="email" id="formLoginRegister-email2" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-email2">Your email</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-lock prefix"></i>
+                    <input type="password" id="formLoginRegiser-password2" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegiser-password2">Your password</label>
+                  </div>
+
+                  <div class="text-center mt-4 pt-3">
+                    <button type="button" class="btn btn-outline-primary mr-1 mb-2 waves-effect waves-light">Forgot password?</button>
+                    <button type="button" class="btn btn-primary mb-2">Login</button>
+                  </div>
+
+                </form>
+                <!-- Login form -->
+
+              </div>
+              <!-- First panel -->
+
+              <!-- Second panel -->
+              <div class="tab-pane fade in show active" id="modalLoginRegister-register2" role="tabpanel">
+
+                <!-- Register form -->
+                <form id="formLoginRegister-register2" class="pt-2" action="register" method="post">
+
+                  <div class="md-form md-outline">
+                    <i class="fas fa-user prefix"></i>
+                    <input type="text" id="formLoginRegister-name2" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-name2">Your name</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-pencil-alt prefix"></i>
+                    <input type="text" id="formLoginRegister-username2" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-username2">Your username</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-envelope prefix"></i>
+                    <input type="email" id="formLoginRegister-email-example2" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-email-example2">Your email</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-lock prefix"></i>
+                    <input type="password" id="formLoginRegister-password-example2" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-password-example2">Your password</label>
+                  </div>
+                  <div class="md-form md-outline">
+                    <i class="fas fa-key prefix"></i>
+                    <input type="password" id="formLoginRegister-password-repeat2" class="form-control">
+                    <label data-error="wrong" data-success="right" for="formLoginRegister-password-repeat2">Repeat password</label>
+                  </div>
+
+                  <div class="form-check mt-4 mb-3 pl-0 text-left">
+                    <input type="checkbox" class="form-check-input filled-in" id="formLoginRegister-newsletter2" name="newsletter">
+                    <label class="form-check-label small grey-text" for="formLoginRegister-newsletter2">
+                      I agree to sign up for account notifications and newsletter
+                    </label>
+                  </div>
+
+                  <div class="text-center">
+                    <p class="small grey-text mb-4">Lorem ipsum dolor sit amet <a target="_blank" href="#!">Privacy Policy</a>.</p>
+                    <button type="button" class="btn btn-primary my-2">Sign up</button>
+                  </div>
+
+                </form>
+                <!-- Register form -->
+
+              </div>
+              <!-- Second panel -->
+
+            </div>
+            <!-- Content -->
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary waves-effect waves-light" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Login / Register -->
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light fixed-top scrolling-navbar">
+      <div class="container-fluid">
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="https://mdbecommerce.com/">
+          <strong><span class="text-grey">Hom</span><span class="text-primary">i</span><span class="text-grey">es</span><span class="text-primary">.</span></strong>
+        </a>
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+          aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="basicExampleNav">
+
+          <!-- Right -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="#!" class="nav-link navbar-link-2 waves-effect">
+                <span class="badge badge-pill badge-danger">5</span>
+                <i class="fas fa-shopping-cart pl-0"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#!" class="nav-link waves-effect">
+                Shop
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#!" class="nav-link waves-effect">
+                Blog
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#!" data-toggle="modal" data-target="#modalContactForm" class="nav-link waves-effect">
+                Contact
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#!" data-toggle="modal" data-target="#modalLoginRegister" class="nav-link waves-effect">
+                Sign in
+              </a>
+            </li>
+            <li class="nav-item pl-2 mb-2 mb-md-0">
+              <a href="#!" data-toggle="modal" data-target="#modalLoginRegister2" type="button" class="btn btn-outline-info btn-md btn-rounded btn-navbar waves-effect waves-light">Sign up</a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Links -->
+      </div>
+    </nav>
+    <!-- Navbar -->
+
+    <div class="jumbotron color-grey-light mt-70">
+      <div class="d-flex align-items-center h-100">
+        <div class="container text-center py-5">
+          <h3 class="mb-0">Shop</h3>
+        </div>
+      </div>
+    </div>
+
+  </header>
+  <!-- Main Navigation -->
+
+  <!-- Main layout -->
+  <main>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-lg-4 mt-3 mb-4">
+
+          <h4 class="mb-4">Categories</h4>
+
+          <!-- Section: Categories -->
+          <section>
+
+            <h5 class="mb-3">Decor</h5>
+
+            <div class="text-muted small text-uppercase mb-5">
+
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Decorative accessories</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Cylinders and jars</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Wall decorations</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Flowerpots</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Hourglass</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Lanterns</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Mirrors</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Dream Catchers</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Notebooks</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Feathers</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Frames</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Candlesticks</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Vases</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Pendants</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Candlesticks</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Clocks</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Other</a></p>
+
+            </div>
+
+          </section>
+          <!-- Section: Categories -->
+
+          <!-- Section: Categories -->
+          <section>
+
+            <h5 class="mb-3">Kitchen</h5>
+
+            <div class="text-muted small text-uppercase mb-5">
+
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Boards</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Jugs</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Shelves</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Pots</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Glasses</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Cups</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Mirrors</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Litter bins</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Baskets</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Bowls</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Glasses</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Cutlery</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Plates</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Trays</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Thermoses</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Other</a></p>
+
+            </div>
+
+          </section>
+          <!-- Section: Categories -->
+
+          <!-- Section: Categories -->
+          <section>
+
+            <h5 class="mb-3">Bathroom</h5>
+
+            <div class="text-muted small text-uppercase mb-5">
+
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Cosmetics</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Storage</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Towels</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Hangers</a></p>
+
+            </div>
+
+          </section>
+          <!-- Section: Categories -->
+
+          <!-- Section: Categories -->
+          <section>
+
+            <h5 class="mb-3">Seasonal items</h5>
+
+            <div class="text-muted small text-uppercase mb-5">
+
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Christmas</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Easter</a></p>
+              <p class="mb-3"><a href="#!" class="card-link-secondary">Summer</a></p>
+
+            </div>
+
+          </section>
+          <!-- Section: Categories -->
+
+          <!-- Section: Filters -->
+          <section>
+
+            <h5 class="mb-4">Filters</h5>
+
+            <!-- Section: Price version 2 -->
+            <section class="mb-4">
+
+              <h6 class="font-weight-bold mb-3">Price</h6>
+
+              <div class="slider-price d-flex align-items-center my-4">
+                <span class="font-weight-normal small text-muted mr-2">$0</span>
+                <form class="multi-range-field w-100">
+                  <input id="multi" class="multi-range" type="range" />
+                </form>
+                <span class="font-weight-normal small text-muted ml-2">$500</span>
+              </div>
+
+            </section>
+            <!-- Section: Price version 2 -->
+
+          </section>
+          <!-- Section: Filters -->
+
+        </div>
+        <div class="col-lg-8">
+
+          <!-- Section: Block Content -->
+          <section>
+
+            <div class="row d-flex justify-content-around align-items-center mb-4">
+              <div class="col-12 col-md-3 text-center text-md-left">
+                <a href="#!" class="text-reset"><i class="fas fa-th-list fa-lg mr-1"></i></a href="#!">
+                <a href="#!" class="text-reset"><i class="fas fa-th-large fa-lg"></i></a href="#!">
+              </div>
+              <div class="col-12 col-md-5">
+                <div class="d-flex flex-wrap">
+                  <div class="select-outline position-relative w-100">
+                    <select class="mdb-select md-outline md-form">
+                      <option value="" disabled selected>Sort by</option>
+                      <option value="1">Popularity</option>
+                      <option value="2">Price: lowest to highest</option>
+                      <option value="3">Price: highest to lowest</option>
+                      <option value="4">Newest</option>
+                      <option value="5">Most rated</option>
+                    </select>
+                    <label>Sorting</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 text-center">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center float-md-right mb-0">
+                    <li class="page-item"><a class="page-link"><i class="fas fa-chevron-left"></i></a></li>
+                    <li class="page-item active"><a class="page-link">1</a></li>
+                    <li class="page-item"><a class="page-link">2</a></li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item"><a class="page-link"><i class="fas fa-chevron-right"></i></a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+
+          </section>
+          <!-- Section: Block Content -->
+
+          <!--Section: Block Content-->
+          <section>
+
+            <!-- Grid row -->
+            <div class="row mb-4">
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(58).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Round mirror</h5>
+                    <h6 class="mb-3">$ 55.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(59).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Small wicker basket</h5>
+                    <h6 class="mb-3">$ 9.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(60).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Ceramic hare</h5>
+                    <h6 class="mb-3">$ 29.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(61).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Palm leaf</h5>
+                    <h6 class="mb-3">$ 13.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+              
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(62).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>5 ceramic eggs</h5>
+                    <h6 class="mb-3">$ 25.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(63).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Flat eagrass basket</h5>
+                    <h6 class="mb-3">$ 20.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(64).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Set of two vases</h5>
+                    <h6 class="mb-3">$ 45.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+              
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(65).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Stoneware pot - L</h5>
+                    <h6 class="mb-3">$ 30.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(66).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Seagrass basket - M</h5>
+                    <h6 class="mb-3">$ 23.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(67).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Set of 4 ceramic cups</h5>
+                    <h6 class="mb-3">$ 39.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(68).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>White dessert plate</h5>
+                    <h6 class="mb-3">$ 15.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-md-6 col-lg-4 mb-4">
+
+                <!-- Card -->
+                <div class="">
+
+                  <div class="view zoom z-depth-2 rounded">
+                    <img class="img-fluid w-100" src="https://mdbootstrap.com/img/Photos/Horizontal/Interior/img(10).jpg" alt="Sample">
+                    <a href="#!">
+                      <div class="mask"></div>
+                    </a>
+                  </div>
+
+                  <div class="text-center pt-4">
+
+                    <h5>Set of 3 baskets</h5>
+                    <h6 class="mb-3">$ 79.00</h6>
+                    <button type="button" class="btn btn-primary btn-sm mr-1"><i class="fas fa-shopping-cart pr-2"></i>Add to cart</button>
+                    <button type="button" class="btn btn-danger btn-sm px-3 material-tooltip-main" data-toggle="tooltip"
+                      data-placement="top" title="Add to wishlist"><i class="far fa-heart"></i></button>
+
+                  </div>
+
+                </div>
+                <!-- Card -->
+
+              </div>
+              <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+          </section>
+          <!--Section: Block Content-->
+
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+  <!-- Main layout -->
+
+  <!-- Footer -->
+  <footer class="page-footer font-small elegant-color">
+
+    <div class="color-primary">
+      <div class="container">
+
+        <!-- Grid row-->
+        <div class="row py-4 d-flex align-items-center">
+
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+            <h6 class="mb-0">Get connected with us on social networks!</h6>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+            <!-- Facebook -->
+            <a class="fb-ic">
+              <i class="fab fa-facebook-f white-text mr-4"> </i>
+            </a>
+            <!-- Twitter -->
+            <a class="tw-ic">
+              <i class="fab fa-twitter white-text mr-4"> </i>
+            </a>
+            <!--Instagram-->
+            <a class="ins-ic">
+              <i class="fab fa-instagram white-text"> </i>
+            </a>
+
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row-->
+
+      </div>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left pt-4 pt-md-5">
+
+      <!-- Grid row -->
+      <div class="row mt-1 mt-md-0 mb-4 mb-md-0">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
+
+          <!-- Links -->
+          <h5>About us</h5>
+          <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+
+          <ul class="list-unstyled foot-desc">
+            <li class="mb-2">
+              <a href="#!">About us</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Terms of use</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Privacy policy</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Our brands</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Corporate social responsibility</a>
+            </li>
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
+
+          <!-- Links -->
+          <h5>Your account</h5>
+          <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+
+          <ul class="list-unstyled foot-desc">
+            <li class="mb-2">
+              <a href="#!">Sign in</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Sign up</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Your orders</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Account settings</a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
+
+          <!-- Links -->
+          <h5>Payments and delivery</h5>
+          <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+
+          <ul class="list-unstyled foot-desc">
+            <li class="mb-2">
+              <a href="#!">Free shipping</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Zero waste shipments</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Payments</a>
+            </li>
+            <li class="mb-2">
+              <a href="#!">Shipping and returns</a>
+            </li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+        <hr class="clearfix w-100 d-md-none">
+
+        <!-- Grid column -->
+        <div class="col-md-3 mx-auto mt-3 mt-md-0 mb-0 mb-md-4">
+
+          <!-- Links -->
+          <h5>Contacts</h5>
+          <hr class="color-primary mb-4 mt-0 d-inline-block mx-auto w-60">
+
+          <ul class="fa-ul foot-desc ml-4">
+            <li class="mb-2"><span class="fa-li"><i class="far fa-map"></i></span>New York, Avenue Street 10
+            </li>
+            <li class="mb-2"><span class="fa-li"><i class="fas fa-phone-alt"></i></span>042 876 836 908</li>
+            <li class="mb-2"><span class="fa-li"><i class="far fa-envelope"></i></span>company@example.com</li>
+            <li><span class="fa-li"><i class="far fa-clock"></i></span>Monday - Friday: 10-17</li>
+          </ul>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row -->
+
+    </div>
+
+  </footer>
+  <!-- Footer -->
+
+  <!-- SCRIPTS -->
+  <!-- JQuery -->
+  <!-- <script src="https://mdbootstrap.com/previews/ecommerce-demo/js/jquery-3.4.1.min.js"></script> -->
+  <!-- Bootstrap tooltips -->
+  <!-- <script type="text/javascript" src="https://mdbootstrap.com/previews/ecommerce-demo/js/popper.min.js"></script> -->
+  <!-- Bootstrap core JavaScript -->
+  <!-- <script type="text/javascript" src="https://mdbootstrap.com/previews/ecommerce-demo/js/bootstrap.js"></script> -->
+  <!-- MDB core JavaScript -->
+  <!-- <script type="text/javascript" src="https://mdbootstrap.com/previews/ecommerce-demo/js/mdb.min.js"></script> -->
+  <!-- MDB Ecommerce JavaScript -->
+  <!-- <script type="text/javascript" src="https://mdbootstrap.com/previews/ecommerce-demo/js/mdb.ecommerce.min.js"></script> -->
+  <!-- <script>
+    $(document).ready(function () {
+      $('.mdb-select').materialSelect();
+      $('.select-wrapper.md-form.md-outline input.select-dropdown').bind('focus blur', function () {
+        $(this).closest('.select-outline').find('label').toggleClass('active');
+        $(this).closest('.select-outline').find('.caret').toggleClass('active');
+      });
+    });
+
+    $(function () {
+      $('.material-tooltip-main').tooltip({
+        template: '<div class="tooltip md-tooltip-main"><div class="tooltip-arrow md-arrow"></div><div class="tooltip-inner md-inner-main"></div></div>'
+      })
+    })
+
+    "use strict";function _instanceof(t,n){return null!=n&&"undefined"!=typeof Symbol&&n[Symbol.hasInstance]?n[Symbol.hasInstance](t):t instanceof n}function _typeof(t){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function _toConsumableArray(t){return _arrayWithoutHoles(t)||_iterableToArray(t)||_nonIterableSpread()}function _nonIterableSpread(){throw new TypeError("Invalid attempt to spread non-iterable instance")}function _iterableToArray(t){if(Symbol.iterator in Object(t)||"[object Arguments]"===Object.prototype.toString.call(t))return Array.from(t)}function _arrayWithoutHoles(t){if(Array.isArray(t)){for(var n=0,o=new Array(t.length);n<t.length;n++)o[n]=t[n];return o}}function _classCallCheck(t,n){if(!_instanceof(t,n))throw new TypeError("Cannot call a class as a function")}function _defineProperties(t,n){for(var o=0;o<n.length;o++){var i=n[o];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(t,i.key,i)}}function _createClass(t,n,o){return n&&_defineProperties(t.prototype,n),o&&_defineProperties(t,o),t}!function(t){var n="100%",o="vertical",i=!0,e=!1,s=!1,a=!1,l=null,r=null,u="#4285F4",h="#4285F4",g="#fff",c=["#fff"],p=0,m=100,f="",v="",d=1,b=1,y=0,C=function(){function C(t,T){_classCallCheck(this,C),this.defaults={width:n,direction:o,value:{min:p,max:m},single:{active:i,value:{step:d,symbol:f},counting:s,countingTarget:r,bgThumbColor:u,textThumbColor:g,multi:{active:e,value:{step:b,symbol:v},counting:a,rangeLength:y,countingTarget:l,bgThumbColor:h,textThumbColor:c}}},this.$range=t,this.options=this.assignedOptions(T),this.$rangeWrapper=this.$range.parent().hasClass("multi-range-field")?this.$range.parent():null,this.thumbHtml='<span class="thumb"><span class="value"></span></span>',this.rangeMousedown=!1,this.left,this.init()}return _createClass(C,[{key:"assignedOptions",value:function(n){return t.extend({},this.defaults,n)}},{key:"init",value:function(){this.addThumb(),this.rangeChange(),this.multiRangeInit(),this.inputMouseDown(),this.mouseUponInput(),this.mouseMoveOnInput(),this.mouseOutFromInput(),this.multiRangeValue(),this.multiRangeCSS(),this.inputMultiRange()}},{key:"randomLetter",value:function(){for(var t="",n="abcdefghijklmnopqrstuvwxyz123456789",o=arguments.length,i=new Array(o),e=0;e<o;e++)i[e]=arguments[e];for(var s=0;s<new Number(i);s++)t+=n.charAt(Math.floor(Math.random()*n.length));return t}},{key:"addThumb",value:function(){!0===this.options.single.active?t(this.$range.prop({id:this.randomLetter(10),disabled:!1})).after(t(this.thumbHtml).attr("data-id","")):t(this.$range.prop("disabled",!0)),"horizontal"===this.options.direction&&this.$rangeWrapper.addClass("thumb-horizontal-wrapper")}},{key:"rangeChange",value:function(){var n=this;this.$range.on("change",function(o){o.preventDefault();var i=t(o.target),e=i.siblings(".thumb").find(".value");void 0!==n.options.single.value?e.html("".concat(i.val()," ").concat(n.options.single.value.symbol)):e.html(i.val())})}},{key:"multiRangeInit",value:function(){this.$range.attr({min:this.options.value.min,max:this.options.value.max,step:void 0!==this.options.single.value?this.options.single.value.step:this.defaults.single.value.step,symbol:void 0!==this.options.single.value?this.options.single.value.symbol:this.defaults.single.value.symbol}),this.$range.addClass("mdbMultiRange original"),this.$range.val(this.$range.attr("min"))}},{key:"inputMouseDown",value:function(){var n=this;this.$range.on("input mousedown",function(o){var i=t(o.target),e=i.siblings(".thumb"),s=i.outerWidth();if(e.length||n.addThumb(),e.find(".value").html(i.val()),n.rangeMousedown=!0,i.addClass("active"),e.hasClass("active")||e.css({height:"30px",width:"30px",top:"-23px",marginLeft:"-15px"}),"input"!==o.type){var a=o.pageY,l=i.offset().top;"horizontal"===n.options.direction||(a=o.pageX),"horizontal"===n.options.direction||(l=i.offset().left),n.left=null==a?o.originalEvent.touches[0].pageY-l:a-l,n.left<0?n.left=0:n.left>s&&(n.left=s),e.addClass("active").css("left",n.left)}e.attr("data-id",i.attr("id")),i.hasClass("ghost")?(e.css("background-color",i.data("color")),e.children().css("color",i.data("text-color"))):(e.css("background-color",void 0===n.options.single.bgThumbColor?n.defaults.single.bgThumbColor:n.options.single.bgThumbColor),e.children().css("color",void 0===n.options.single.textThumbColor?n.defaults.single.textThumbColor:n.options.single.textThumbColor)),void 0!==n.options.single.value?e.find(".value").html("".concat(i.val()," ").concat(n.options.single.value.symbol)):e.find(".value").html(i.val())})}},{key:"mouseUponInput",value:function(){var n=this;this.$range.on("mouseup",function(o){n.rangeMousedown=!1,t(o.target).parent().removeClass("active")})}},{key:"mouseMoveOnInput",value:function(){var n=this;this.$range.on("mousemove",function(o){var i=t(o.target),e=i.siblings(".thumb");if(n.left,n.rangeMousedown){e.hasClass("active")||e.css({height:"30px",width:"30px",top:"-23px",marginLeft:"-15px"});var s=i.outerWidth(),a=o.pageY,l=i.offset().top;"horizontal"===n.options.direction||(a=o.pageX),"horizontal"===n.options.direction||(l=i.offset().left),"horizontal"===n.options.direction?e.addClass("active thumb-horizontal"):e.addClass("active"),n.left=null==a?o.originalEvent.touches[0].pageY-l:a-l,n.left<0?n.left=0:n.left>s&&(n.left=s),e.css("left",n.left),i.length<1&&e.find(".value").html("".concat(i.val()," ").concat(n.options.single.value.symbol))}})}},{key:"mouseOutFromInput",value:function(){var n=this;this.$range.on("mouseout",function(o){if(!n.rangeMousedown){var i=t(o.target).siblings(".thumb");i.hasClass("active")&&i.animate({marginLeft:"0px",top:"12px",height:"0px",width:"0px"},230),i.removeClass("active")}})}},{key:"multiRangeValue",value:function(){var n=this;if(null!==this.options.single.countingTarget&&void 0!==this.options.single.countingTarget&&""!==this.options.single.countingTarget&&!0===this.options.single.counting){var o=t("".concat(_toConsumableArray(this.options.single.countingTarget.split(" "))));this.$range.on("input mousedown touchstart",function(){void 0===n.options.single.value||o.is("input")?o.is("input")?o.val("".concat(n.$range.val())):o.html("".concat(n.$range.val())):o.html("".concat(n.$range.val()," ").concat(n.options.single.value.symbol))})}}},{key:"multiRangeCSS",value:function(){this.$range.css("width",this.options.width)}},{key:"inputMultiRange",value:function(){var n=this;if(void 0!==this.options.single.multi&&!0===this.options.single.active&&this.options.single.multi.rangeLength>=1)for(var o=0;o<this.options.single.multi.rangeLength;o++){var i=this.$range.clone(!0,!0).prop("id",this.randomLetter(10));void 0!==this.options.single.multi.bgThumbColor&&void 0!==this.options.single.multi.textThumbColor&&this.options.single.multi.bgThumbColor.length>1?i.attr({"data-color":this.options.single.multi.bgThumbColor.length>1?_toConsumableArray(this.options.single.multi.bgThumbColor)[o]:_toConsumableArray(this.options.single.multi.bgThumbColor)[0],"data-text-color":this.options.single.multi.textThumbColor.length>1?_toConsumableArray(this.options.single.multi.textThumbColor)[o]:_toConsumableArray(this.options.single.multi.textThumbColor)[0]}):i.attr({"data-color":[],"data-text-color":[]}),i.attr({step:void 0!==this.options.single.multi.value?this.options.single.multi.value.step:null,symbol:void 0!==this.options.single.multi.value?this.options.single.multi.value.symbol:null}),i.val(i.attr("max")),i.addClass("mdbMultiRange ghost"),i.prev().css("background-color",this.options.single.multi.bgThumbColor),this.$range.after(i),null!==this.options.single.multi.countingTarget&&void 0!==this.options.single.multi.countingTarget&&"object"===_typeof(this.options.single.multi.countingTarget)&&this.options.single.multi.counting&&function(){var e=t("".concat(Object.values(_toConsumableArray(n.options.single.multi.countingTarget))[o]));i.on("input mousedown",function(o){void 0===n.options.single.multi.value||e.is("input")?e.is("input")?e.val(t(o.target).val()):e.html(t(o.target).val()):e.html("".concat(t(o.target).val()," ").concat(n.options.single.multi.value.symbol))})}()}}}]),C}();t.fn.mdbRange=function(n){return this.each(function(){new C(t(this),n)})}}(jQuery);
+
+    $('#multi').mdbRange({
+      single: {
+        active: true,
+        multi: {
+          active: true,
+          rangeLength: 1
+        },
+      }
+    });
+  </script> -->
+</body>
+
+</html>

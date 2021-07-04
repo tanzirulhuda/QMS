@@ -1,0 +1,21 @@
+h2{
+    text-align:center;
+    padding: 20px;
+  }
+.clients-info{
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+.slide{
+    margin: 10px 20px 0px 20px;
+}
+.slide > img{
+    border: 1px solid #fff;
+    background-color: rgb(219, 219, 219);
+    border-radius: 50%;
+    padding: 5px;
+}
+footer{
+    position: relative;
+    bottom: 0;
+}
