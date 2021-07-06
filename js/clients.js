@@ -8,6 +8,7 @@ var owl = $('.owl-carousel');
         autoplayHoverPause:false,
         animateOut: 'fadeOut',
         responsiveClass:true,
+        nav:true,
         responsive:{
             0:{
                 items:1,
@@ -15,7 +16,7 @@ var owl = $('.owl-carousel');
             },
             600:{
                 items:3,
-                nav:false
+                nav:true
             },
             1000:{
                 items:5,
@@ -24,3 +25,20 @@ var owl = $('.owl-carousel');
             }
         }
     });
+// $('.owl-carousel').owlCarousel({
+//     rtl:true,
+//     loop:true,
+//     margin:10,
+//     nav:true,
+//     responsive:{
+//         0:{
+//             items:1
+//         },
+//         600:{
+//             items:3
+//         },
+//         1000:{
+//             items:5
+//         }
+//     }
+// })
